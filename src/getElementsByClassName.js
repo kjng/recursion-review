@@ -4,7 +4,19 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className
-) {
-  // your code here
+var getElementsByClassName = function(className) {
+  var elementList = [];
+
+  var searchTree = function(element) {
+    var classList = element.classList;
+    if (classList !== undefined && classList.contains(className)) {
+      elementList.push(element);
+    }
+
+    if (element.hasChildNodes() && element !== undefined) {
+      element.childNodes.forEach(searchTree);
+    }
+  }
+  searchTree(document.body);
+  return elementList;
 };
